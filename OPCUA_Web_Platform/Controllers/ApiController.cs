@@ -21,7 +21,7 @@ using WebPlatform.Exceptions;
 
 namespace WebPlatform.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("[controller]")]
     public class ApiController : Controller
     {
@@ -45,6 +45,8 @@ namespace WebPlatform.Controllers
         [HttpGet("data-sets/{ds_id:int}/nodes/{node_id:regex(^\\d+-(?:(\\d+)|(.+))$)?}")]
         public async Task<IActionResult> GetNode(int ds_id, string node_id = "0-85")
         {
+            DateTime dateTime = DateTime.Now;
+
             if (ds_id < 0 || ds_id >= _uaServers.Length) return NotFound($"There is no Data Set for id {ds_id}");
             
             var serverUrl = _uaServers[ds_id].Url;
@@ -150,7 +152,7 @@ namespace WebPlatform.Controllers
             {
                 return StatusCode(500, "Data Set " + ds_id + " NotAvailable");
             }
-            
+            TimeSpan interval = DateTime.Now - dateTime;
             return Ok(result);
         }
 

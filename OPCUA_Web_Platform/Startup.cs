@@ -72,7 +72,7 @@ namespace WebPlatform
             // Check for invalid HTTP requests before the MVC
             //app.UseRequestValidator();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseRefreshToken();
             
             app.UseMvc();
